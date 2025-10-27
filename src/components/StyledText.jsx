@@ -1,22 +1,12 @@
-// // import { Text } from 'react-native'
-// // import { useMMKVBoolean } from 'react-native-mmkv';
+import { Text } from 'react-native'
+import { useMMKVBoolean } from 'react-native-mmkv';
 
-// // const StyledText = ({ className, value }) => {
-// //     const [darkmode, setDarkmode] = useMMKVBoolean('darkmode');
+const StyledText = ({ className, value }) => {
+    const [darkmode, setDarkmode] = useMMKVBoolean('darkmode');
 
-// //     return (
-// //         <Text className={`${className} ${darkmode ? "text-white" : "text-black"}`}>{value}</Text>
-// //     )
-// // }
+    return (
+        <Text className={`${className} ${darkmode ? "text-white" : "text-black"}`}>{value}</Text>
+    )
+}
 
-// // export default StyledText
-
-// import React from 'react'
-
-// const StyledText = () => {
-//   return (
-//     <div>StyledText</div>
-//   )
-// }
-
-// export default StyledText
+export default StyledText

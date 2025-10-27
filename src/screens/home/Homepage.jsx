@@ -3,7 +3,7 @@ import List from '../../components/homepage/List'
 import Categories from '../../components/homepage/Categories'
 import Banner from '../../components/homepage/Banner'
 import { Link } from '@react-navigation/native'
-
+import StyledView from '../../components/StyledView'
 const Homepage = () => {
     const techProducts = [
         {
@@ -41,6 +41,8 @@ const Homepage = () => {
 
     return (
         <ScrollView className='flex-1'>
+<StyledView>
+
             <Banner/>
 
             <Link screen="DiscountedItemsScreen" className='underline ml-4 mb-4'>See discounted products</Link>
@@ -50,6 +52,7 @@ const Homepage = () => {
             <List data={techProducts} title="Tech products" />
 
             <List data={otherProducts} title="Other products" />
+</StyledView>
 
         </ScrollView>
     )
