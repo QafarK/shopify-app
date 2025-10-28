@@ -13,6 +13,16 @@ const Login = () => {
         }))
     }
 
+    // const handleLogin = async () => {
+    //     try {
+    //         const { data } = await axios.post('https://lvn-invoicer-api.runasp.net/api/user/login', formdata);
+    //         setToken(data.accessToken)
+    //         setRefreshToken(data.refreshToken)
+    //     } catch (error) {
+    //         console.error('Login error:', error);
+    //     }
+    // }
+
     return (
         <View style={{
             flex: 1,
@@ -32,6 +42,7 @@ const Login = () => {
             {/* sign in button */}
             <TouchableOpacity  onPress={() => {
                 setIsAuthenticated(true)
+                // handleLogin()
             }} style={{ backgroundColor: '#8E6CEF', paddingHorizontal: 20, justifyContent: 'center', marginTop: 20, width: 350, height:49,  borderRadius: 100  }}>
                 <Text style={{ color: '#FFFFFF', textAlign: 'center', fontSize: 16, fontWeight: '600' }}>Sign in</Text>
             </TouchableOpacity>

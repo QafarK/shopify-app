@@ -4,7 +4,23 @@ import Categories from '../../components/homepage/Categories'
 import Banner from '../../components/homepage/Banner'
 import { Link } from '@react-navigation/native'
 import StyledView from '../../components/StyledView'
+import { useEffect } from 'react'
+import api from '../../utils/axios.js'
 const Homepage = () => {
+  const getUserData = async () => {
+    try {
+      const { data } = await api.get('/user/user-data');
+      console.log(data)
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+    }
+  }
+
+  useEffect(() => {
+    getUserData()
+  }, [])
+
+
     const techProducts = [
         {
             id: 1,
