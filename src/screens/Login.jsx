@@ -1,8 +1,9 @@
 import { Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { useState } from 'react'
 import { useMMKVBoolean } from 'react-native-mmkv';
-
+import { useNavigation } from '@react-navigation/native';
 const Login = () => {
+    const navigation = useNavigation();
     const [formdata, setFormdata] = useState({})
     const [isAuthenticated, setIsAuthenticated] = useMMKVBoolean('isAuthenticated');
    
@@ -12,16 +13,6 @@ const Login = () => {
             [type]: text
         }))
     }
-
-    // const handleLogin = async () => {
-    //     try {
-    //         const { data } = await axios.post('https://lvn-invoicer-api.runasp.net/api/user/login', formdata);
-    //         setToken(data.accessToken)
-    //         setRefreshToken(data.refreshToken)
-    //     } catch (error) {
-    //         console.error('Login error:', error);
-    //     }
-    // }
 
     return (
         <View style={{
@@ -42,9 +33,8 @@ const Login = () => {
             {/* sign in button */}
             <TouchableOpacity  onPress={() => {
                 setIsAuthenticated(true)
-                // handleLogin()
             }} style={{ backgroundColor: '#8E6CEF', paddingHorizontal: 20, justifyContent: 'center', marginTop: 20, width: 350, height:49,  borderRadius: 100  }}>
-                <Text style={{ color: '#FFFFFF', textAlign: 'center', fontSize: 16, fontWeight: '600' }}>Sign in</Text>
+                <Text style={{ color: '#FFFFFF', textAlign: 'center', fontSize: 16, fontWeight: '600' }}>Continue</Text>
             </TouchableOpacity>
 
            <View style={{ flexDirection: 'row', marginTop: 20, justifyContent: 'center', alignItems: 'center' }}>
@@ -53,7 +43,7 @@ const Login = () => {
                 Don't have an account ?
             </Text>
   
-            <TouchableOpacity onPress={() => {console.log('create one')}}>
+            <TouchableOpacity onPress={() => navigation.navigate('RegisterScreen' )} style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <Text style={{ fontSize: 14, fontWeight: '900', color: 'black', marginLeft: 5 }}>
                     Create One
                 </Text>
@@ -63,10 +53,7 @@ const Login = () => {
 
         </View>
     )
-    // show password duzeld!!!!
-// {/* <TouchableOpacity onPress={() => navigation.navigate('Register')}>
-//   <Text style={{ color: '#8E6CEF', fontWeight: '600' }}>Create One</Text>
-// </TouchableOpacity> */}
+
 
  
     

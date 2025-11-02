@@ -1,8 +1,13 @@
 import { Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { useState } from 'react'
+import { useNavigation } from '@react-navigation/native';
+import { useMMKVBoolean } from 'react-native-mmkv';
 
 const Register = () => {
+
+    const navigation = useNavigation();
  const [formdata, setFormdata] = useState({})
+       const [isAuthenticated, setIsAuthenticated] = useMMKVBoolean('isAuthenticated');
    
     const handleInput = (text, type) => {
         setFormdata(prevState => ({
@@ -44,9 +49,10 @@ const Register = () => {
             }} placeholder='Password' style={{ borderWidth: 1, borderColor: '#F4F4F4', backgroundColor: '#F4F4F4', width: 350, height:56, paddingLeft: 24, marginTop: 16,  borderRadius: 4 }} />
 
             <TouchableOpacity  onPress={() => {
-                console.log(formdata)
+                setIsAuthenticated(true)
+                // handleLogin()
             }} style={{ backgroundColor: '#8E6CEF', paddingHorizontal: 20, justifyContent: 'center', marginTop: 20, width: 350, height:49,  borderRadius: 100  }}>
-                <Text style={{ color: '#FFFFFF', textAlign: 'center', fontSize: 16, fontWeight: '600' }}>Sign in</Text>
+                <Text style={{ color: '#FFFFFF', textAlign: 'center', fontSize: 16, fontWeight: '600' }}>Continue</Text>
             </TouchableOpacity>
 
            <View style={{ flexDirection: 'row', marginTop: 20, justifyContent: 'center', alignItems: 'center' }}>
@@ -55,7 +61,7 @@ const Register = () => {
                 Already have an Account ?
             </Text>
   
-            <TouchableOpacity onPress={() => console.log('Sign in clicked')}>
+            <TouchableOpacity onPress={() => navigation.navigate('LoginScreen' )}>
                 <Text style={{ fontSize: 14, fontWeight: '900', color: 'black', marginLeft: 5 }}>
                     Sign In
                 </Text>

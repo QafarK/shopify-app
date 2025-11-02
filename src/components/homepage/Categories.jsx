@@ -1,42 +1,63 @@
-import { Text, FlatList, TouchableOpacity } from 'react-native'
+import { Text, FlatList, TouchableOpacity, View } from 'react-native'
+import { useNavigation } from '@react-navigation/native';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Categories = () => {
-    const categories = [
-        {
-            id: 1,
-            title: 'All',
-        },
-        {
-            id: 2,
-            title: 'Tech',
-        },
-        {
-            id: 3,
-            title: 'Sports',
-        },
-        {
-            id: 4,
-            title: 'Food',
-        },
-        {
-            id: 5,
-            title: 'Movies',
-        },
-        {
-            id: 6,
-            title: 'Fashion',
-        },
-        {
-            id: 7,
-            title: 'Books',
-        },
-    ]
+    const navigation = useNavigation();
+
+const categories = [
+  {
+    id: 1,
+    title: 'Hoodies',
+    icon: 'tshirt-crew',        
+  },
+  {
+    id: 2,
+    title: 'Shorts',
+    icon: 'human-male',         
+  },
+  {
+    id: 3,
+    title: 'Shoes',
+    icon: 'shoe-sneaker',       
+  },
+  {
+    id: 4,
+    title: 'Bag',
+    icon: 'bag-personal',       
+  },
+   {
+    id: 5,
+    title: 'Accessories',
+    icon: 'watch-variant',     
+  }
+];
 
     return (
-        <FlatList showsHorizontalScrollIndicator={false} contentContainerClassName='gap-2 px-4' horizontal data={categories} renderItem={({ item }) =>
-            <TouchableOpacity key={item.id} className='p-4 bg-gray-300 rounded-lg'>
-                <Text>{item.title}</Text>
-            </TouchableOpacity>} />
+        <View>
+            <View className='flex-row items-center justify-between px-4 mt-4 mb-2'>
+                    <Text className='text-xl font-semibold'>Categories</Text>
+                        <TouchableOpacity onPress={() => {navigation.navigate("CategoriesScreen")}}>
+                            <Text className='color-gray-800'>See All</Text>
+                        </TouchableOpacity>
+            </View>
+
+            <FlatList
+                data={categories}
+    numColumns={categories.length}
+    scrollEnabled={false} 
+    contentContainerClassName="px-2"
+    renderItem={({ item }) => (
+        <View className="flex-1 items-center justify-center p-1 ">
+        <TouchableOpacity className="w-16 h-16 bg-gray-200 rounded-full items-center justify-center">
+            <MaterialCommunityIcons name={item.icon} size={28} color="#8E6CEF" />
+        </TouchableOpacity>
+
+        <Text className="mt-2 text-sm text-center">{item.title}</Text>
+        </View>
+                    )}
+            />
+        </View>
     )
 }
 

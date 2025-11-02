@@ -1,22 +1,21 @@
-import { FlatList, Text, TouchableOpacity } from 'react-native'
-
+import {TouchableOpacity, View } from 'react-native'
+import { Image } from 'react-native'
+import HomeImage from '../../assets/icons/Shop.svg'
+import BasketIcon from '../../assets/icons/Basket.svg'
+import { useNavigation } from '@react-navigation/native'
 const Banner = () => {
-    const items = [
-        {
-            id: 1,
-            message: '50% off on all products',
-            bgColor: "bg-blue-500"
-        },
-        {
-            id: 2,
-            message: 'Free shipping on orders over $50',
-            bgColor: "bg-red-500"
-        }
-    ]
+    const navigation = useNavigation();  
     return (
-        <FlatList showsHorizontalScrollIndicator={false} horizontal contentContainerClassName='px-4 my-5 gap-4' data={items} renderItem={({ item }) => <TouchableOpacity className={`${item.bgColor} rounded-lg w-[84%] h-[200px] justify-center items-center`}>
-            <Text className="text-center text-white text-2xl font-medium">{item.message}</Text>
-        </TouchableOpacity>} />
+
+            <View className='h-24 flex-row items-center justify-between px-4'>
+                
+                <HomeImage />
+
+                <TouchableOpacity onPress={() =>  navigation.navigate('BasketScreen')}>
+                    <BasketIcon />
+                </TouchableOpacity>
+
+            </View>
     )
 }
 

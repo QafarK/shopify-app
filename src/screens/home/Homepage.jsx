@@ -2,10 +2,14 @@ import { ScrollView } from 'react-native'
 import List from '../../components/homepage/List'
 import Categories from '../../components/homepage/Categories'
 import Banner from '../../components/homepage/Banner'
-import { Link } from '@react-navigation/native'
 import StyledView from '../../components/StyledView'
 import { useEffect } from 'react'
 import api from '../../utils/axios.js'
+import  SearchBar  from '../../components/homepage/SearchBar'
+import Rectangle1 from '../../assets/icons/Rectangle1.svg'
+import Rectangle2 from '../../assets/icons/Rectangle2.svg'
+import Rectangle3 from '../../assets/icons/Rectangle3.svg'
+import Rectangle4 from '../../assets/icons/Rectangle4.svg'
 const Homepage = () => {
   const getUserData = async () => {
     try {
@@ -21,53 +25,57 @@ const Homepage = () => {
   }, [])
 
 
-    const techProducts = [
-        {
-            id: 1,
-            title: 'Macbook Pro',
-            category: 'Tech',
-            image: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
-            price: 1999
-        },
-        {
-            id: 2,
-            title: 'Iphone 14 Pro',
-            category: 'Tech',
-            image: 'https://m.media-amazon.com/images/I/61HHS0HrjpL._UF1000,1000_QL80_.jpg',
-            price: 999
-        },
-    ]
+const firstProducts = [
+  {
+    id: 1,
+    title: "Men's Harrington Jacket",
+    category: 'Hoodies',
+    image: 'https://m.media-amazon.com/images/I/512zSxD04SL._AC_UY1000_.jpg',
+    price: 120
+  },
+  {
+    id: 2,
+    title: "Max Cirro Men's Slides",
+    category: 'Shoes',
+    image: 'https://www.permanentstyle.com/wp-content/uploads/2023/08/rondini-sandals-style.jpg', 
+    price: 65
+  },
+]
 
-    const otherProducts = [
-        {
-            id: 3,
-            title: 'Football',
-            category: 'Sports',
-            image: 'https://contents.mediadecathlon.com/p2154018/k$62eddd5da1ca0c3add68b47c60eee952/football-size-5-first-kick-for-kids-ages-to-12-years-yellow.jpg',
-            price: 49
-        },
-        {
-            id: 4,
-            title: 'Pizza',
-            category: 'Food',
-            image: 'https://www.tasteofhome.com/wp-content/uploads/2018/01/Homemade-Pizza_EXPS_FT23_376_EC_120123_3.jpg',
-            price: 19
-        },
-    ]
+const otherProducts = [
+  {
+    id: 3,
+    title: "Men's Harrington Jacket",
+    category: 'Hoodies',
+    image: 'https://www.johnpartridge.com/cdn/shop/files/mens-harrington-jacket-navy.png?v=1747647869', 
+    price: 75
+  },
+  {
+    id: 4,
+    title: "Men's Casual T-Shirt",
+    category: 'T-Shirts',
+    image: 'https://m.media-amazon.com/images/I/512zSxD04SL._AC_UY1000_.jpg',
+
+    price: 35
+  },
+]
+
+
 
     return (
         <ScrollView className='flex-1'>
+
 <StyledView>
 
             <Banner/>
 
-            <Link screen="DiscountedItemsScreen" className='underline ml-4 mb-4'>See discounted products</Link>
+            <SearchBar />
 
-            <Categories />
+            <Categories /> 
+           
+            <List data={firstProducts} title="New in" />
 
-            <List data={techProducts} title="Tech products" />
-
-            <List data={otherProducts} title="Other products" />
+            <List data={otherProducts} title="All products" />
 </StyledView>
 
         </ScrollView>
