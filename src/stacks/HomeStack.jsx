@@ -11,7 +11,7 @@ const HomeStack = () => {
         <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name="HomeScreen" component={Homepage} />
             <Stack.Screen options={{animation: 'none'}} name="DetailsScreen" component={Details} />
-            <Stack.Screen name="CategoryScreen" component={Categories} />
+            <Stack.Screen name="CategoriesScreen" component={Categories} />
             <Stack.Screen name="BasketScreen" component={Basket} />
         </Stack.Navigator>
     )
