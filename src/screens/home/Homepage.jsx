@@ -1,57 +1,68 @@
-import { ScrollView } from 'react-native'
-import List from '../../components/homepage/List'
-import Categories from '../../components/homepage/Categories'
-import Banner from '../../components/homepage/Banner'
-import StyledView from '../../components/StyledView'
-import { useEffect, useState } from 'react'
-import api from '../../utils/axios.js'
-import SearchBar from '../../components/homepage/SearchBar'
+import { ScrollView, ActivityIndicator } from 'react-native';
+import { useEffect, useState } from 'react';
+import api from '../../utils/axios.js';
+import List from '../../components/homepage/List';
+import Categories from '../../components/homepage/Categories';
+import Banner from '../../components/homepage/Banner';
+import StyledView from '../../components/StyledView';
+import SearchBar from '../../components/homepage/SearchBar';
 
 const Homepage = () => {
-  const [searchTerm, setSearchTerm] = useState("");
-  
-  const getUserData = async () => {
-    try {
-      const { data } = await api.get('/user/user-data');
-      console.log(data)
-    } catch (error) {
-      console.error('Error fetching user data:', error);
-    }
-  };
+  const [searchTerm, setSearchTerm] = useState('');
+  const [newProducts, setNewProducts] = useState([]);
+  const [allProducts, setAllProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+
+  const fetchProducts = async () => {
+  try {
+    setLoading(true);
+    const newRes = await api.get('/products/new');
+    const allRes = await api.get('/products');
+
+    console.log('New:', newRes.data);
+    console.log('All:', allRes.data);
+
+    setNewProducts(Array.isArray(newRes.data) ? newRes.data : newRes.data.products);
+    setAllProducts(Array.isArray(allRes.data) ? allRes.data : allRes.data.products);
+    console.log('All products:', allRes.data);
+
+  } catch (err) {
+    console.error('API error:', err.message);
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   useEffect(() => {
-    getUserData()
+    fetchProducts();
   }, []);
 
-  const firstProducts = [
-    { id: 1, title: "Men's Harrington Jacket", category: 'Hoodies', image: 'https://m.media-amazon.com/images/I/512zSxD04SL._AC_UY1000_.jpg', price: 120 },
-    { id: 2, title: "Max Cirro Men's Slides", category: 'Shoes', image: 'https://www.permanentstyle.com/wp-content/uploads/2023/08/rondini-sandals-style.jpg', price: 65 },
-  ];
-
-  const otherProducts = [
-    { id: 3, title: "Men's Harrington Jacket", category: 'Hoodies', image: 'https://www.johnpartridge.com/cdn/shop/files/mens-harrington-jacket-navy.png?v=1747647869', price: 75 },
-    { id: 4, title: "Men's Casual T-Shirt", category: 'T-Shirts', image: 'https://m.media-amazon.com/images/I/512zSxD04SL._AC_UY1000_.jpg', price: 35 },
-  ];
-
-
-  const filteredFirst = firstProducts.filter(p =>
+  const filteredNew = newProducts.filter(p =>
     p.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const filteredOther = otherProducts.filter(p =>
+  const filteredAll = allProducts.filter(p =>
     p.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  if (loading) {
+    return (
+      <StyledView className="flex-1 justify-center items-center">
+        <ActivityIndicator size="large" color="#000" />
+      </StyledView>
+    );
+  }
 
   return (
-    <ScrollView className='flex-1'>
+    <ScrollView className="flex-1">
       <StyledView>
         <Banner />
-        
         <SearchBar onSearch={setSearchTerm} />
-
-        <Categories /> 
-        <List data={filteredFirst} title="New in" />
-        <List data={filteredOther} title="All products" />
+        <Categories />
+        <List data={filteredNew} title="New in" />
+        <List data={filteredAll} title="All products" />
       </StyledView>
     </ScrollView>
   );
