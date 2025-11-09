@@ -5,7 +5,7 @@ import { getToken, clearToken } from "./store.js";
 import { refreshToken } from "./auth.js";
 
 const api = axios.create({
-    baseURL: 'https://lvn-invoicer-api.runasp.net/api',
+    baseURL: 'https://ilkinibadov.com/api/v1',
     timeout: 10000,
     headers: {
         'Content-Type': 'application/json',
